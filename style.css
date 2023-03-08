@@ -1,0 +1,39 @@
+html, body {
+  margin: 0;
+}
+
+html {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  height: inherit;
+}
+
+h1 {
+  font-size: 2rem;
+  letter-spacing: -1px;
+  position: absolute;
+  margin: 0;
+  top: -4px;
+  left: 5px;
+  color: rgb(36, 57, 44);
+  text-shadow: 0 0 4px white;
+}
+
+.count {
+  position: absolute;
+  margin: 0;
+  top: 35px;
+  left: 5px;
+  color: #000000;
+}
+
+.controls { 
+  position: absolute;
+  margin: 0;
+  top: 60px;
+  left: 5px;
+  color: #000000;}
