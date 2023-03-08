@@ -1,10 +1,11 @@
+/* The code first creates a canvas element with id "myCanvas" and gets its context 2D. Then it sets the width and height of the canvas equal to the inner width and height of the window, respectively. */
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 
 const width = canvas.width = window.innerWidth;
 const height = canvas.height = window.innerHeight;
 
-// Set the source of the image
+/* The program loads three image files: 'bugD.svg', 'netW.png', and 'plant.svg', using the Image() constructor and sets their sources. */
 const bugImg = new Image();
 bugImg.src = 'images/bugD.svg';
 
@@ -14,24 +15,25 @@ netImg.src = 'images/netW.png';
 const plantImg = new Image();
 plantImg.src = 'images/plant.svg';
 
+/* The program then sets up a listener for when the images finish loading. When each image is loaded, the onload function increments the counter numImagesLoaded. Once all images have been loaded, the loop() function is called. */
 let numImagesLoaded = 0;
 
-bugImg.onload = netImg.onload = function() {
-  // Increment the number of images loaded
+bugImg.onload = netImg.onload = plantImg.onload = function() {
+  
   numImagesLoaded++;
 
-  // Check if both images have been loaded
-  if (numImagesLoaded === 2) {
-    // Once both images are loaded, start the loop
+  if (numImagesLoaded === 3) {
+   
     loop();
   }
 };
 
-
+/* The program defines a function random that takes two arguments min and max and returns a random integer between min and max. */
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+/* The program defines a class Plant that represents a plant on the canvas. The constructor takes two arguments x and y that represent the position of the plant on the canvas. The class has two properties: size, which is the size of the plant (set to 64), and exists, which is a boolean that determines if the plant should be drawn on the canvas. The class also has a method draw that draws the plant image on the canvas at the specified position. */
 class Plant {
 
   constructor(x, y) {
@@ -45,12 +47,11 @@ draw() {
   ctx.drawImage(plantImg, this.x, this.y)
 }
 }
-
-class Bug {
+/* The Bug class is an extension of Plant, it takes x and y positions from a super constructor and adds velocity in the x and y directions. */
+class Bug extends Plant {
 
   constructor(x, y, velX, velY) {
-    this.x = x;
-    this.y = y;
+    super(x, y);
     this.velX = velX;
     this.velY = velY;
     this.size = 64;
@@ -75,7 +76,7 @@ class Bug {
     ctx.restore();
   }
   
-
+  // This method calculates if the Bugs are moving off screen and reverses the travel direction if so.
   update() {
     if ((this.x + this.size) >= width) {
        this.velX = -(Math.abs(this.velX));
@@ -103,6 +104,7 @@ class Bug {
     this.y += this.velY;
   }
 
+  /* This function calculates the distance between bugs and plants. If they overlap the plant's exists property is set to false */
   collisionDetect() {
     for (const plant of plants) {
       if (plant.exists === true) {
@@ -117,16 +119,15 @@ class Bug {
     }
   }
 }
-
-class Net {
+/* The Net class extends Plant it passes in x and y positions from a super constructor and adds a set velocity in the x and y directions. */
+class Net extends Plant {
   constructor(x, y, velX, velY) {
-    this.x = x;
-    this.y = y;
+    super(x, y);
     this.velX = 20;
     this.velY = 20;
     this.size = -30;
     
-
+/* This switch statement allows the net to be moved using WASD and the arrow keys */
     window.addEventListener("keydown", (e) => {
       switch (e.key) {
         case "a":
@@ -154,6 +155,7 @@ class Net {
     ctx.drawImage(netImg, this.x, this.y)
   }
 
+  /* CheckBounds() is similar to the upodate() method in the Bug class, if the net exceeds the edges of the screen it is pushed back onto the screen by changing the x or y position as necessary.*/
   checkBounds() {
     if ((this.x + 80) >= width) {
        this.x -= 15;
@@ -187,13 +189,15 @@ collisionDetect() {
 }
 }
 
-
+// Create an instance of Net
 const net = new Net(random(0 + 10,width - 10),
 random(0 + 10,height - 10),);
 
+// Initialize arrays to store bugs and plants
 const bugs = [];
 const plants =[];
 
+// Generate five bugs and ten plants with random positions and sizes
 while (bugs.length < 5) {
   const size = 64;
    const bug = new Bug(
@@ -221,15 +225,24 @@ while (plants.length < 10) {
   plants.push(plant);
 }
 
+// Define the loop function, which will be called repeatedly to update the game
 function loop() {
   ctx.fillStyle = 'rgba(115, 118, 83, .9)'; 
   ctx.fillRect(0, 0,  width, height);
 
+  // Draw the net and check for collisions with bugs and plants
   net.draw();
   net.checkBounds();
   net.collisionDetect();
-  
 
+// Restart the game if the Enter key is pressed
+  window.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+      location.reload();
+    }
+  });
+  
+// Count the number of bugs and plants that are still alive, and update them
   let bugCount = bugs.length;
   let plantCount = plants.length;
 
@@ -251,33 +264,24 @@ function loop() {
     }
   }
 
-  if (plantCount === 0) {
-
-    window.addEventListener('keyup', (e) => {
-      if (e.key === 'Enter') {
-        // Reload the page to restart the game
-        location.reload();
-      }
-    });
+  // If there are no plants left, display the game over message
+  if (plantCount === 0) { 
     ctx.font = '48px sans-serif';
     ctx.fillStyle = 'white';
     ctx.textAlign = 'center';
     ctx.fillText('Game Over', width/2 , height/2);
     ctx.font = '32px sans-serif';
     ctx.fillText('The bugs ruined your harvest', width / 2, height / 2 + 40);
+    ctx.font = '24px sans-serif';
+    ctx.fillText('Press ENTER to restart the game', width / 2, height / 2 + 80);
     return;
   }
 
+  // Update the bug count display
   para.textContent = `Bug count: ${bugCount}`
 
+  // If there are no bugs left, display the win message
   if (bugCount === 0) {
-
-    window.addEventListener('keyup', (e) => {
-      if (e.key === 'Enter') {
-        location.reload();
-      }
-    });
-    
     ctx.font = '48px sans-serif';
     ctx.fillStyle = 'white';
     ctx.textAlign = 'center';
@@ -288,6 +292,7 @@ function loop() {
     ctx.fillText('Press ENTER to restart the game', width / 2, height / 2 + 80);
   }
 
+  // Continue the game loop
   requestAnimationFrame(loop);
 
  

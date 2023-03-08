@@ -12,10 +12,6 @@ How to play
 
     The game ends when all plants have been eaten or all bugs have been caught.
 
-Technologies Used
-
-    JavaScript
-    HTML5 Canvas
 
 Code Overview
 
