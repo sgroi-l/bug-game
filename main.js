@@ -125,7 +125,7 @@ class Net extends Plant {
     super(x, y);
     this.velX = 20;
     this.velY = 20;
-    this.size = -30;
+    this.size = -10;
     
 /* This switch statement allows the net to be moved using WASD and the arrow keys */
     window.addEventListener("keydown", (e) => {
