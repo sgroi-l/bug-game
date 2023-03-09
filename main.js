@@ -235,12 +235,7 @@ function loop() {
   net.checkBounds();
   net.collisionDetect();
 
-// Restart the game if the Enter key is pressed
-  window.addEventListener('keyup', (e) => {
-    if (e.key === 'Enter') {
-      location.reload();
-    }
-  });
+
   
 // Count the number of bugs and plants that are still alive, and update them
   let bugCount = bugs.length;
@@ -297,6 +292,14 @@ function loop() {
 
  
 }
+
+// Restart the game if the Enter key is pressed
+window.addEventListener('keyup', (e) => {
+  if (e.key === 'Enter') {
+    console.log('PRESSED ENTER');
+    location.reload();
+  }
+});
 
  
  const para = document.querySelector('p');
