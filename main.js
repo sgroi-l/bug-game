@@ -95,7 +95,7 @@ class Bug extends Plant {
     }
   
     // randomly change velocity
-    if (Math.random() < 0.03) {
+    if (Math.random() < .03) {
       this.velX = random(-4,4);
       this.velY = random(-4,4);
     }
