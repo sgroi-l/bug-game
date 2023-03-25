@@ -13,27 +13,33 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
-  letter-spacing: -1px;
+  font-family: 'Labrada', serif;
+  font-size: 2.5rem;
   position: absolute;
   margin: 0;
-  top: -4px;
-  left: 5px;
-  color: rgb(36, 57, 44);
+  left: 10px;
+  color: rgb(46, 96, 65);
   text-shadow: 0 0 4px white;
 }
 
 .count {
+  font-family: 'Labrada', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
   position: absolute;
   margin: 0;
-  top: 35px;
-  left: 5px;
-  color: #000000;
+  top: 50px;
+  left: 10px;
 }
 
 .controls { 
+  font-family: 'Labrada', serif;
+  font-weight: 400;
+  font-size: 1.2rem;
   position: absolute;
   margin: 0;
-  top: 60px;
-  left: 5px;
-  color: #000000;}
+  top: 85px;
+  left: 10px;
+}
+
+
