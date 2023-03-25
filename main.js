@@ -227,7 +227,7 @@ while (plants.length < 10) {
 
 // Define the loop function, which will be called repeatedly to update the game
 function loop() {
-  ctx.fillStyle = 'rgba(115, 118, 83, .9)'; 
+  ctx.fillStyle = 'rgba(164, 204, 163, .9)'; 
   ctx.fillRect(0, 0,  width, height);
 
   // Draw the net and check for collisions with bugs and plants
