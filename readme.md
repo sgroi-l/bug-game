@@ -3,7 +3,7 @@
 ## Overview
 Bug Catching Game
 
-In this project I built a `canvas` game using almost excusively JavaScript. The objective is to catch the bugs before they eat the plants. 
+In this project I built a `canvas` game using almost exclusively JavaScript. The objective is to catch the bugs before they eat the plants. 
 
 ### How to play
 
